@@ -11,7 +11,6 @@ class Solution:
 
         for i in range(len(rotateArray)-1):
             if rotateArray[i] < rotateArray[i+1]:
-                print(rotateArray[i])
                 rotateArray[i], rotateArray[i+1] = rotateArray[i + 1], rotateArray[i]
 
         return rotateArray[-1]
