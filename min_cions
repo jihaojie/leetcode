@@ -1,0 +1,23 @@
+"""
+动态规划
+
+硬币找零问题。 给定一个硬币值列表 ，返回最小的硬币钱数值。
+例：coins_list = [1,2,5]   change = 13    返回4
+"""
+
+def dp_coins(keys, S):
+    import numpy as np
+    data = np.zeros((len(keys), S + 1), dtype=int) #创建二维列表
+    data[:, 0] = 1 
+    for s in range(1,S + 1):  # 先轮询只需要一次的.
+        for k in range(len(keys)):
+            if s == keys[k]: #如果硬币值 = 零钱数
+                data[k][s] = 1 #硬币数 = 1
+            elif s > keys[k]:
+                data[k, s] = data[k, s - keys[k]] + 1 #pre（当前零钱值- 硬币值）+ 1
+            else: #如果小于，
+                data[k,s] = data[k-1,s]   #等于上一个硬币值的数量
+    #print(data)
+    return data[-1,-1]
+
+dp_coins([1, 2, 5,10], 17)
